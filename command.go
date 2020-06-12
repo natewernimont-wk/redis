@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-redis/redis/v8/internal"
-	"github.com/go-redis/redis/v8/internal/proto"
-	"github.com/go-redis/redis/v8/internal/util"
+	"github.com/Workiva/redis/internal"
+	"github.com/Workiva/redis/internal/proto"
+	"github.com/Workiva/redis/internal/util"
 )
 
 type Cmder interface {

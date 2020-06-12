@@ -1,4 +1,4 @@
-module github.com/go-redis/redis/v8
+module github.com/Workiva/redis
 
 require (
 	github.com/cespare/xxhash v1.1.0

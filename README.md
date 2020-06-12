@@ -1,11 +1,11 @@
 # Redis client for Golang
 
 [![Build Status](https://travis-ci.org/go-redis/redis.png?branch=master)](https://travis-ci.org/go-redis/redis)
-[![GoDoc](https://godoc.org/github.com/go-redis/redis?status.svg)](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc)
+[![GoDoc](https://godoc.org/github.com/natewernimont-wk/redis?status.svg)](https://pkg.go.dev/github.com/Workiva/redis?tab=doc)
 
 - [Docs](https://redis.uptrace.dev)
-- [Reference](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc)
-- [Examples](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#pkg-examples)
+- [Reference](https://pkg.go.dev/github.com/Workiva/redis?tab=doc)
+- [Examples](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#pkg-examples)
 
 ## Sponsors
 
@@ -13,8 +13,8 @@
 
 ## Ecosystem
 
-- [Redis Cache](https://github.com/go-redis/cache).
-- [Rate limiting](https://github.com/go-redis/redis_rate).
+- [Redis Cache](https://github.com/natewernimont-wk/cache).
+- [Rate limiting](https://github.com/natewernimont-wk/redis_rate).
 - [Distributed Locks](https://github.com/bsm/redislock).
 
 ## Features
@@ -22,21 +22,21 @@
 - Redis 3 commands except QUIT, MONITOR, SLOWLOG and SYNC.
 - Automatic connection pooling with
   [circuit breaker](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern) support.
-- [Pub/Sub](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#PubSub).
-- [Transactions](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#example-Client-TxPipeline).
-- [Pipeline](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#example-Client-Pipeline) and
-  [TxPipeline](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#example-Client-TxPipeline).
-- [Scripting](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#Script).
-- [Timeouts](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#Options).
-- [Redis Sentinel](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#NewFailoverClient).
-- [Redis Cluster](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#NewClusterClient).
-- [Cluster of Redis Servers](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#example-NewClusterClient--ManualSetup)
+- [Pub/Sub](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#PubSub).
+- [Transactions](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#example-Client-TxPipeline).
+- [Pipeline](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#example-Client-Pipeline) and
+  [TxPipeline](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#example-Client-TxPipeline).
+- [Scripting](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#Script).
+- [Timeouts](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#Options).
+- [Redis Sentinel](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#NewFailoverClient).
+- [Redis Cluster](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#NewClusterClient).
+- [Cluster of Redis Servers](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#example-NewClusterClient--ManualSetup)
   without using cluster mode and Redis Sentinel.
-- [Ring](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#NewRing).
-- [Instrumentation](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#ex-package--Instrumentation).
+- [Ring](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#NewRing).
+- [Instrumentation](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#ex-package--Instrumentation).
 
-API docs: https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc. Examples:
-https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#pkg-examples.
+API docs: https://pkg.go.dev/github.com/Workiva/redis?tab=doc. Examples:
+https://pkg.go.dev/github.com/Workiva/redis?tab=doc#pkg-examples.
 
 ## Installation
 
@@ -45,13 +45,13 @@ uses import versioning. So please make sure to initialize a Go module before ins
 
 ```shell
 go mod init github.com/my/repo
-go get github.com/go-redis/redis/v8
+go get github.com/Workiva/redis
 ```
 
 Import:
 
 ```go
-import "github.com/go-redis/redis/v8"
+import "github.com/Workiva/redis"
 ```
 
 ## Quickstart
@@ -101,7 +101,7 @@ func ExampleClient() {
 
 ## Howto
 
-Please go through [examples](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#pkg-examples)
+Please go through [examples](https://pkg.go.dev/github.com/Workiva/redis?tab=doc#pkg-examples)
 to get an idea how to use this package.
 
 ## Look and feel

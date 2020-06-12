@@ -14,9 +14,9 @@ import (
 	"github.com/cespare/xxhash"
 	"github.com/dgryski/go-rendezvous"
 
-	"github.com/go-redis/redis/v8/internal"
-	"github.com/go-redis/redis/v8/internal/hashtag"
-	"github.com/go-redis/redis/v8/internal/pool"
+	"github.com/Workiva/redis/internal"
+	"github.com/Workiva/redis/internal/hashtag"
+	"github.com/Workiva/redis/internal/pool"
 )
 
 var errRingShardsDown = errors.New("redis: all ring shards are down")
