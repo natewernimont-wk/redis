@@ -51,6 +51,8 @@ type ClusterOptions struct {
 	// and Cluster.ReloadState to manually trigger state reloading.
 	ClusterSlots func() ([]ClusterSlot, error)
 
+	OnMovedError func(string, string, string)
+
 	// Following options are copied from Options struct.
 
 	Dialer func(ctx context.Context, network, addr string) (net.Conn, error)
@@ -800,9 +802,14 @@ func (c *ClusterClient) _process(ctx context.Context, cmd Cmder) error {
 		moved, ask, addr = isMovedError(lastErr)
 		if moved || ask {
 			var err error
+			prevAddr := node.Client.opt.Addr
 			node, err = c.nodes.Get(addr)
 			if err != nil {
 				return err
+			}
+
+			if c.opt.OnMovedError != nil {
+				c.opt.OnMovedError(prevAddr, addr, node.Client.opt.Addr)
 			}
 			continue
 		}
