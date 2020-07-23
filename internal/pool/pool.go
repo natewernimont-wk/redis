@@ -13,6 +13,7 @@ import (
 
 var ErrClosed = errors.New("redis: client is closed")
 var ErrPoolTimeout = errors.New("redis: connection pool timeout")
+var ErrTooManyConnections = errors.New("redis: maximum connection limit reached")
 
 var timers = sync.Pool{
 	New: func() interface{} {
@@ -53,6 +54,7 @@ type Options struct {
 	OnClose func(*Conn) error
 
 	PoolSize           int
+	MaxConns           int
 	MinIdleConns       int
 	MaxConnAge         time.Duration
 	PoolTimeout        time.Duration
@@ -75,6 +77,9 @@ type ConnPool struct {
 	idleConns    []*Conn
 	poolSize     int
 	idleConnsLen int
+
+	connsCountMu sync.Mutex
+	connsCount   int
 
 	stats Stats
 
@@ -161,6 +166,26 @@ func (p *ConnPool) newConn(ctx context.Context, pooled bool) (*Conn, error) {
 	return cn, nil
 }
 
+func (p *ConnPool) incrementConnsCount() error {
+	p.connsCountMu.Lock()
+	defer p.connsCountMu.Unlock()
+
+	if p.connsCount >= p.opt.MaxConns {
+		return ErrTooManyConnections
+	}
+
+	p.connsCount++
+
+	return nil
+}
+
+func (p *ConnPool) decrementConnsCount() {
+	p.connsCountMu.Lock()
+	defer p.connsCountMu.Unlock()
+
+	p.connsCount--
+}
+
 func (p *ConnPool) dialConn(ctx context.Context, pooled bool) (*Conn, error) {
 	if p.closed() {
 		return nil, ErrClosed
@@ -170,12 +195,18 @@ func (p *ConnPool) dialConn(ctx context.Context, pooled bool) (*Conn, error) {
 		return nil, p.getLastDialError()
 	}
 
+	err := p.incrementConnsCount()
+	if err != nil {
+		return nil, err
+	}
+
 	netConn, err := p.opt.Dialer(ctx)
 	if err != nil {
 		p.setLastDialError(err)
 		if atomic.AddUint32(&p.dialErrorsNum, 1) == uint32(p.opt.PoolSize) {
 			go p.tryDial()
 		}
+		p.decrementConnsCount()
 		return nil, err
 	}
 
